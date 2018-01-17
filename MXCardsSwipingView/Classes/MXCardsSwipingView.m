@@ -114,7 +114,7 @@ static const CGFloat kMXDistanceFromCenterShowViewsThreshold = 10.0f;
 }
 
 - (void)pan:(UIPanGestureRecognizer*)gesture {
-    UIView* topCard = [self topCard];
+    UIView *topCard = [self topCard];
     if (!topCard) {
         return;
     }
@@ -123,6 +123,9 @@ static const CGFloat kMXDistanceFromCenterShowViewsThreshold = 10.0f;
     if (gesture.state == UIGestureRecognizerStateBegan) {
         self.attachment = [self attachCard:topCard ToPoint:location];
         [self.animator addBehavior:self.attachment];
+        UIDynamicItemBehavior * dynamicItem = [[UIDynamicItemBehavior alloc] initWithItems:@[topCard]];
+        dynamicItem.allowsRotation = NO;
+        [self.animator addBehavior:dynamicItem];
     } else if (gesture.state == UIGestureRecognizerStateChanged) {
         self.attachment.anchorPoint = location;
         [self showLeftOrRightViewsOnCard:topCard];
