@@ -47,7 +47,8 @@ static const CGFloat kMXDistanceFromCenterShowViewsThreshold = 10.0f;
 
 - (void)setup {
     self.cards = [[NSMutableArray alloc] init];
-    UIPanGestureRecognizer* panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+    panGesture.cancelsTouchesInView = NO;
     [self addGestureRecognizer:panGesture];
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self];
 }
